@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Selenium Actions Demo</title>
+
+<style>
+
+#dragBox{
+width:120px;
+height:120px;
+background-color:orange;
+text-align:center;
+line-height:120px;
+cursor:move;
+margin-bottom:20px;
+}
+
+#dropArea{
+width:200px;
+height:200px;
+border:3px dashed black;
+text-align:center;
+line-height:200px;
+}
+
+#doubleClickBtn{
+padding:10px;
+background-color:lightgreen;
+margin-top:20px;
+}
+
+#rightClickArea{
+width:200px;
+height:100px;
+background-color:lightblue;
+margin-top:20px;
+text-align:center;
+line-height:100px;
+}
+
+</style>
+
+<script>
+
+function allowDrop(ev){
+ev.preventDefault();
+}
+
+function drag(ev){
+ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev){
+ev.preventDefault();
+var data = ev.dataTransfer.getData("text");
+ev.target.appendChild(document.getElementById(data));
+}
+
+function doubleClickMessage(){
+alert("Double Click Successful!");
+}
+
+</script>
+
+</head>
+
+<body>
+
+<h2>Selenium Actions Class Practice Page</h2>
+
+<h3>Drag and Drop Example</h3>
+
+<div id="dragBox" draggable="true" ondragstart="drag(event)">
+DRAG ME
+</div>
+
+<div id="dropArea" ondrop="drop(event)" ondragover="allowDrop(event)">
+DROP HERE
+</div>
+
+<h3>Double Click Example</h3>
+
+<button id="doubleClickBtn" ondblclick="doubleClickMessage()">
+Double Click Me
+</button>
+
+<h3>Right Click Area</h3>
+
+<div id="rightClickArea">
+Right Click Here
+</div>
+
+<h3>Keyboard Input</h3>
+
+<input type="text" id="nameBox" placeholder="Type your name">
+
+</body>
+</html>
