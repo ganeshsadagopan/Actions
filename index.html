@@ -5,37 +5,79 @@
 
 <style>
 
-#dragBox{
-width:120px;
-height:120px;
-background-color:orange;
+body{
+font-family:Arial;
+background:#f4f6f9;
 text-align:center;
-line-height:120px;
-cursor:move;
-margin-bottom:20px;
+padding:40px;
+}
+
+h2{
+color:#333;
+}
+
+.container{
+display:flex;
+justify-content:center;
+gap:60px;
+margin-top:30px;
+}
+
+.box{
+width:150px;
+height:150px;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+}
+
+#dragBox{
+background:#ff9800;
+color:white;
+cursor:grab;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
 }
 
 #dropArea{
-width:200px;
-height:200px;
-border:3px dashed black;
-text-align:center;
-line-height:200px;
+border:3px dashed #444;
+color:#444;
+background:white;
 }
 
-#doubleClickBtn{
-padding:10px;
-background-color:lightgreen;
-margin-top:20px;
+button{
+padding:12px 25px;
+border:none;
+border-radius:6px;
+background:#4CAF50;
+color:white;
+font-size:16px;
+cursor:pointer;
+margin-top:30px;
+}
+
+button:hover{
+background:#3c8c3f;
 }
 
 #rightClickArea{
-width:200px;
+width:220px;
 height:100px;
-background-color:lightblue;
-margin-top:20px;
-text-align:center;
-line-height:100px;
+background:#2196F3;
+color:white;
+margin:30px auto;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:8px;
+}
+
+input{
+padding:10px;
+width:250px;
+border-radius:6px;
+border:1px solid #ccc;
 }
 
 </style>
@@ -52,8 +94,12 @@ ev.dataTransfer.setData("text", ev.target.id);
 
 function drop(ev){
 ev.preventDefault();
+
 var data = ev.dataTransfer.getData("text");
-ev.target.appendChild(document.getElementById(data));
+var element = document.getElementById(data);
+
+ev.target.innerHTML = "";  // remove DROP HERE text
+ev.target.appendChild(element);
 }
 
 function doubleClickMessage(){
@@ -70,12 +116,16 @@ alert("Double Click Successful!");
 
 <h3>Drag and Drop Example</h3>
 
-<div id="dragBox" draggable="true" ondragstart="drag(event)">
-DRAG ME
+<div class="container">
+
+<div id="dragBox" class="box" draggable="true" ondragstart="drag(event)">
+DRAG
 </div>
 
-<div id="dropArea" ondrop="drop(event)" ondragover="allowDrop(event)">
-DROP HERE
+<div id="dropArea" class="box" ondrop="drop(event)" ondragover="allowDrop(event)">
+DROP
+</div>
+
 </div>
 
 <h3>Double Click Example</h3>
